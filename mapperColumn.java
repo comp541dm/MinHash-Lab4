@@ -3,18 +3,22 @@ import java.util.Scanner;
 import java.util.Random;
 import java.util.Arrays;
 
-public class mapper {
+public class mapperColumn {
 
-  public static int numColumns = 10;
-  public static int numRows = 10;
-  public static int numHashes = 100;
-  public static int a[] = new int[numHashes];
-  public static int b[] = new int[numHashes];
+  public static int numColumns;
+  public static int numRows;
+  public static int numHashes; 
+  public static int a[];
+  public static int b[];
 
   public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
+    numHashes = Integer.parseInt(args[0]);
+    numRows = Integer.parseInt(args[1]);
+    numColumns = Integer.parseInt(args[2]);
+    a = new int[numHashes];
+    b = new int[numHashes];
     int[][] signatureMatrix = new int[numHashes][numColumns];
-
     // Need some way to generate an array of hashes
     // hash hashes = new hash[numHashes];
     // Uses these combined with hash function for multiple random hashes
