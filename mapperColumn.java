@@ -44,13 +44,6 @@ public class mapperColumn {
       }
       mapperColumn(column, i);
     }
-
-    // Print sigMatrix
-    // for (int i = 0; i < numHashes; i++) {
-    //   for (int j = 0; j < numColumns; j++)
-    //     System.out.print((signatureMatrix[i][j]) + " ");
-    //   System.out.println();
-    // }
   }
 
   public static int hash (int a, int b, int x) {
@@ -64,22 +57,6 @@ public class mapperColumn {
     b = (b % p);
     return ((a * x + b) % p) % m;
   }
-
-  public static void mapper (int[][] signatureMatrix) {
-    Scanner in = new Scanner(System.in);
-    for (int curRow = 0; curRow < numRows; curRow++) {
-      for (int colNum = 0; colNum < numColumns; colNum++) {
-        if (in.nextInt() == 1) {
-          for (int curHash = 0; curHash < numHashes; curHash++) {
-            if (hash(a[curHash], b[curHash], curRow) < signatureMatrix[curHash][colNum]) {
-              signatureMatrix[curHash][colNum] = hash(a[curHash], b[curHash], curRow);
-            } 
-          }
-        }
-      }
-    }
-  } 
-
 
   public static void mapperColumn (int[] column, int columnIndex) {
     int[] sigColumn = new int[numHashes];
@@ -95,14 +72,6 @@ public class mapperColumn {
     }
     System.out.print(columnIndex + ", ");
     printIntArray(sigColumn);
-  }
-
-  public static int[] getColumn (int[][] matrix, int index, int columnLength) {
-    int[] col = new int[columnLength];
-    for (int i = 0; i < columnLength; i++) {
-      col[i] = matrix[i][index];
-    }
-    return col;
   }
 
   public static void printIntArray (int[] arr) {

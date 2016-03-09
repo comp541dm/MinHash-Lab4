@@ -10,12 +10,19 @@ public class reducerRow {
     Scanner in = new Scanner(System.in);
     int numHashes = Integer.parseInt(args[0]);
     int numColumns = Integer.parseInt(args[1]);
+    int set1 = Integer.parseInt(args[2]);
+    int set2 = Integer.parseInt(args[3]);
     int[][] signatureMatrix = new int[numHashes][numColumns];
 
+    // Fill matrix with MAX_VALUE
+    // Algorithmically equivalent to infinity
     for (int i = 0; i < numHashes; i++) {
       Arrays.fill(signatureMatrix[i], Integer.MAX_VALUE);
     }
 
+    // gets HashIndex, and if any hashes are less than current hashes replace them
+    // Example of input: 
+    // 3, 2 3 3 0 0 0 21411342 1
     while (in.hasNextLine()) {
       String[] line = in.nextLine().split(","); 
       int hashRow = Integer.parseInt(line[0]);
@@ -28,11 +35,13 @@ public class reducerRow {
       }
     } 
 
-    System.out.println("Similarity: " +  similarity(
-      getColumn(signatureMatrix, 1, numHashes),
-      getColumn(signatureMatrix, 2, numHashes)));
+    // Checks similarity between 2 sets and outputs it.
+    System.out.println("Similarity: between " + set1 + " and set " + set2 + ": " + similarity(
+      getColumn(signatureMatrix, set1, numHashes),
+      getColumn(signatureMatrix, set2, numHashes)));
   }
  
+  // Returns column of 2-dim array
   public static int[] getColumn (int[][] matrix, int index, int columnLength) {
     int[] col = new int[columnLength];
     for (int i = 0; i < columnLength; i++) {
@@ -41,6 +50,7 @@ public class reducerRow {
     return col;
   }
 
+  // Calculates similarity of 2 sets
   public static double similarity(int[] s1, int[] s2) {
     double sim = 0;
     for (int i = 0; i < s1.length; i++) {

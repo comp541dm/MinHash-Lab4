@@ -9,6 +9,8 @@ public class reducerColumn {
     Scanner in = new Scanner(System.in);
     int numHashes = Integer.parseInt(args[0]);
     int numColumns = Integer.parseInt(args[1]);
+    int set1 = Integer.parseInt(args[2]);
+    int set2 = Integer.parseInt(args[3]);
     int[][] signatureMatrix = new int[numHashes][numColumns];
 
     while (in.hasNextLine()) {
@@ -20,7 +22,7 @@ public class reducerColumn {
       }
     } 
 
-    System.out.println("Similarity: " +  similarity(
+    System.out.println("Similarity: between " + set1 + " and set " + set2 + ": " + similarity(
       getColumn(signatureMatrix, 1, numHashes),
       getColumn(signatureMatrix, 2, numHashes)));
   }

@@ -29,7 +29,6 @@ public class mapperRow {
     for (int i = 0; i < numHashes; i++) {
       a[i] = Math.abs(rand.nextInt());
       b[i] = Math.abs(rand.nextInt());
-      // System.err.println("a[" + i + "]: " + a[i] + " b[" + i + "]: " + b[i]);
       for (int j = 0; j < numColumns; j++) {
         signatureMatrix[i][j] = Integer.MAX_VALUE;
       }
@@ -57,39 +56,6 @@ public class mapperRow {
     b = (b % p);
     return ((a * x + b) % p) % m;
   }
-
-  public static void mapper (int[][] signatureMatrix) {
-    Scanner in = new Scanner(System.in);
-    for (int curRow = 0; curRow < numRows; curRow++) {
-      for (int colNum = 0; colNum < numColumns; colNum++) {
-        if (in.nextInt() == 1) {
-          for (int curHash = 0; curHash < numHashes; curHash++) {
-            if (hash(a[curHash], b[curHash], curRow) < signatureMatrix[curHash][colNum]) {
-              signatureMatrix[curHash][colNum] = hash(a[curHash], b[curHash], curRow);
-            } 
-          }
-        }
-      }
-    }
-  } 
-
-
-  public static void mapperColumn (int[] column, int columnIndex) {
-    int[] sigColumn = new int[numHashes];
-    Arrays.fill(sigColumn, Integer.MAX_VALUE);
-    for (int i = 0; i < column.length; i++) {
-      if (column[i] == 1) {
-        for (int j = 0; j < numHashes; j++) {
-          if (hash(a[j], b[j], i) < sigColumn[j]) {
-            sigColumn[j] = hash(a[j], b[j], i);
-          }       
-        }
-      }
-    }
-    System.out.print(columnIndex + ", ");
-    printIntArray(sigColumn);
-  }
-
   public static void mapperRow (int[] row, int rowIndex) {
     for (int i = 0; i < numHashes; i++) {
       System.out.print(i + ", ");
@@ -104,17 +70,4 @@ public class mapperRow {
     }
   }
 
-  public static int[] getColumn (int[][] matrix, int index, int columnLength) {
-    int[] col = new int[columnLength];
-    for (int i = 0; i < columnLength; i++) {
-      col[i] = matrix[i][index];
-    }
-    return col;
-  }
-
-  public static void printIntArray (int[] arr) {
-    for (int i = 0; i < arr.length - 1; i++)
-      System.out.print(arr[i] + " ");
-    System.out.println(arr[arr.length-1]);
-  }
 } 
